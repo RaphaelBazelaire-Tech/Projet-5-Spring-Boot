@@ -11,7 +11,6 @@ public class Person {
     private String email;
 
     public Person() {
-
     }
 
     public Person(String firstName, String lastName, String address, String city, String zip, String phone, String email) {
