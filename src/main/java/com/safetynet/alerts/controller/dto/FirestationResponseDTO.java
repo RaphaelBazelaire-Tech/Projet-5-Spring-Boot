@@ -9,7 +9,6 @@ public class FirestationResponseDTO {
     private int childCount;
 
     public FirestationResponseDTO() {
-
     }
 
     public FirestationResponseDTO(List<PersonSummaryDTO> persons, int adultCount, int childCount) {
