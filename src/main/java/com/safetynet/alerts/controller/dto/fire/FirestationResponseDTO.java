@@ -1,4 +1,4 @@
-package com.safetynet.alerts.controller.dto;
+package com.safetynet.alerts.controller.dto.fire;
 
 import com.safetynet.alerts.controller.dto.person.PersonSummaryDTO;
 
