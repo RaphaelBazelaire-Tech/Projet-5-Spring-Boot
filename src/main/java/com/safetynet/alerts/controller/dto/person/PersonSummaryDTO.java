@@ -1,4 +1,4 @@
-package com.safetynet.alerts.controller.dto;
+package com.safetynet.alerts.controller.dto.person;
 
 public class PersonSummaryDTO {
 

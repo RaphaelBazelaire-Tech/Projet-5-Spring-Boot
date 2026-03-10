@@ -1,5 +1,7 @@
 package com.safetynet.alerts.controller.dto;
 
+import com.safetynet.alerts.controller.dto.person.PersonSummaryDTO;
+
 import java.util.List;
 
 public class FirestationResponseDTO {
