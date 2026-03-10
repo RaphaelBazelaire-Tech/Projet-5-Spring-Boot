@@ -28,7 +28,7 @@ public class PersonController {
         return ResponseEntity.ok("Personne ajouté avec succès.");
     }
 
-    @PostMapping
+    @PutMapping
     public ResponseEntity<String> updatePerson(@RequestBody Person person) {
         logger.info("PUT /person - Mise à jour d'une personne {} {}", person.getFirstName(), person.getLastName());
 
@@ -37,7 +37,7 @@ public class PersonController {
         return ResponseEntity.ok("Mise à jour d'une personne avec succès.");
     }
 
-    @PostMapping
+    @DeleteMapping
     public ResponseEntity<String> deletePerson(@RequestParam String firstName, @RequestParam String lastName) {
         logger.info("DELETE /person - Suppression d'une personne {} {}", firstName, lastName);
 
