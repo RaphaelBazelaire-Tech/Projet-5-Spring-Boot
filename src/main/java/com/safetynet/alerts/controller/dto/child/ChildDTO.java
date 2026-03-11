@@ -10,7 +10,6 @@ public class ChildDTO {
     private List<String> householdMembers;
 
     public ChildDTO() {
-
     }
 
     public ChildDTO(String firstName, String lastName, int age, List<String> householdMembers) {

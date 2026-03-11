@@ -11,7 +11,6 @@ public class FirePersonDTO {
     private List<String> allergies;
 
     public FirePersonDTO() {
-
     }
 
     public FirePersonDTO(String name, String phone, int age, List<String> medications, List<String> allergies) {

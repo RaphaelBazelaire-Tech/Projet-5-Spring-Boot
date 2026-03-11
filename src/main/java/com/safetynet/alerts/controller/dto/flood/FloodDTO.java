@@ -8,7 +8,6 @@ public class FloodDTO {
     private List<FloodPersonDTO> residents;
 
     public FloodDTO() {
-
     }
 
     public FloodDTO(String address, List<FloodPersonDTO> residents) {

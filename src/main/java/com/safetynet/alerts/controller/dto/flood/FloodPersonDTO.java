@@ -11,7 +11,6 @@ public class FloodPersonDTO {
     private List<String> allergies;
 
     public FloodPersonDTO() {
-
     }
 
     public FloodPersonDTO(String name, String phone, int age, List<String> medications, List<String> allergies) {

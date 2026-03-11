@@ -8,7 +8,6 @@ public class FireAddressDTO {
     private List<FirePersonDTO> residents;
 
     public FireAddressDTO() {
-
     }
 
     public FireAddressDTO(int stationNumber, List<FirePersonDTO> residents) {
