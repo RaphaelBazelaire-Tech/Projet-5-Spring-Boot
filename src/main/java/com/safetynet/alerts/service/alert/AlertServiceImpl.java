@@ -48,6 +48,7 @@ public class AlertServiceImpl implements AlertService {
         logger.debug("Adresses couvertes par la station {}: {}", stationNumber, addresses);
 
         List<PersonSummaryDTO> persons = new ArrayList<>();
+
         int adults = 0;
         int children = 0;
 
@@ -63,7 +64,13 @@ public class AlertServiceImpl implements AlertService {
                 ));
 
                 MedicalRecord record = getMedicalRecord(person.getFirstName(), person.getLastName());
-                int age = calculateAge(record.getBirthdate());
+
+                if (record == null) {
+                    logger.warn("Record medical pour {} {} manquant.", person.getFirstName(), person.getLastName());
+                    continue;
+                }
+
+                int age = record != null ? calculateAge(record.getBirthdate()) : 0;
 
                 if (age <= 18) {
                     children++;
@@ -281,7 +288,7 @@ public class AlertServiceImpl implements AlertService {
     }
 
     private MedicalRecord getMedicalRecord(String firstName, String lastName) {
-        return repository.getMedicalRecords()
+        return repository.getMedicalrecords()
                 .stream()
                 .filter(m -> m.getFirstName().equals(firstName)
                         && m.getLastName().equals(lastName))

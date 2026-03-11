@@ -23,14 +23,14 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     @Override
     public void addMedicalRecord(MedicalRecord medicalRecord) {
         logger.info("Ajout d'un point médical pour {} {}", medicalRecord.getFirstName(), medicalRecord.getLastName());
-        dataRepository.getMedicalRecords().add(medicalRecord);
+        dataRepository.getMedicalrecords().add(medicalRecord);
     }
 
     @Override
     public void updateMedicalRecord(MedicalRecord medicalRecord) {
         logger.info("Mise à jour d'un point médical pour {} {}", medicalRecord.getFirstName(), medicalRecord.getLastName());
 
-        Optional<MedicalRecord> existing = dataRepository.getMedicalRecords()
+        Optional<MedicalRecord> existing = dataRepository.getMedicalrecords()
                 .stream()
                 .filter(m -> m.getFirstName().equalsIgnoreCase(medicalRecord.getFirstName())
                         && m.getLastName().equalsIgnoreCase(medicalRecord.getLastName()))
@@ -47,19 +47,19 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     public void deleteMedicalRecord(String firstName, String lastName) {
         logger.info("Suppression d'un point médical pour {} {}", firstName, lastName);
 
-        dataRepository.getMedicalRecords()
+        dataRepository.getMedicalrecords()
                 .removeIf(m -> m.getFirstName().equalsIgnoreCase(firstName)
                 && m.getLastName().equalsIgnoreCase(lastName));
     }
 
     @Override
     public List<MedicalRecord> getMedicalRecords() {
-        return dataRepository.getMedicalRecords();
+        return dataRepository.getMedicalrecords();
     }
 
     @Override
     public MedicalRecord getMedicalRecordByName(String firstName, String lastName) {
-        return dataRepository.getMedicalRecords()
+        return dataRepository.getMedicalrecords()
                 .stream()
                 .filter(m -> m.getFirstName().equalsIgnoreCase(firstName)
                 && m.getFirstName().equalsIgnoreCase(lastName))

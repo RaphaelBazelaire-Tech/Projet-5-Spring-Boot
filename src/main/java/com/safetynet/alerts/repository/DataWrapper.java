@@ -10,7 +10,7 @@ public class DataWrapper {
 
     private List<Person> persons;
     private List<Firestation> firestations;
-    private List<MedicalRecord> medicalRecords;
+    private List<MedicalRecord> medicalrecords;
 
     public List<Person> getPersons() {
         return persons;
@@ -20,7 +20,7 @@ public class DataWrapper {
         return firestations;
     }
 
-    public List<MedicalRecord> getMedicalRecords() {
-        return medicalRecords;
+    public List<MedicalRecord> getMedicalrecords() {
+        return medicalrecords;
     }
 }

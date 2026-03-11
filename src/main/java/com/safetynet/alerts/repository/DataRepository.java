@@ -2,10 +2,13 @@ package com.safetynet.alerts.repository;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.SerializedName;
 import com.safetynet.alerts.model.Firestation;
 import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.model.Person;
 import jakarta.annotation.PostConstruct;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.core.io.ClassPathResource;
@@ -23,7 +26,9 @@ public class DataRepository {
 
     private List<Person> persons = new ArrayList<>();
     private List<Firestation> firestations = new ArrayList<>();
-    private List<MedicalRecord> medicalRecords = new ArrayList<>();
+
+    @SerializedName("medicalrecords")
+    private List<MedicalRecord> medicalrecords = new ArrayList<>();
 
     @PostConstruct
     public void loadData() {
@@ -39,13 +44,13 @@ public class DataRepository {
             if (dataWrapper != null) {
                 this.persons = dataWrapper.getPersons() != null ? dataWrapper.getPersons() : new ArrayList<>();
                 this.firestations = dataWrapper.getFirestations() != null ? dataWrapper.getFirestations() : new ArrayList<>();
-                this.medicalRecords = dataWrapper.getMedicalRecords() != null ? dataWrapper.getMedicalRecords() : new ArrayList<>();
+                this.medicalrecords = dataWrapper.getMedicalrecords() != null ? dataWrapper.getMedicalrecords() : new ArrayList<>();
             }
 
             logger.info("Données chargés avec succès.");
-            logger.debug("Nombre de persons : {}", this.persons.size());
-            logger.debug("Nombre de firestations : {}", this.firestations.size());
-            logger.debug("Nombre de medical records : {}", this.medicalRecords.size());
+            logger.info("Nombre de persons : {}", this.persons.size());
+            logger.info("Nombre de firestations : {}", this.firestations.size());
+            logger.info("Nombre de medical records : {}", this.medicalrecords.size());
 
         } catch (Exception e) {
             logger.error("Impossible de charger le fichier data.json...", e);
@@ -53,16 +58,20 @@ public class DataRepository {
         }
     }
 
-    public List<Person> getPersons() {
-        return persons;
+    public List<MedicalRecord> getMedicalrecords() {
+        return medicalrecords;
     }
 
     public List<Firestation> getFirestations() {
         return firestations;
     }
 
-    public List<MedicalRecord> getMedicalRecords() {
-        return medicalRecords;
+    public List<Person> getPersons() {
+        return persons;
+    }
+
+    public void setMedicalrecords(List<MedicalRecord> medicalrecords) {
+        this.medicalrecords = medicalrecords;
     }
 
     public void setPersons(List<Person> persons) {
@@ -73,7 +82,4 @@ public class DataRepository {
         this.firestations = firestations;
     }
 
-    public void setMedicalRecords(List<MedicalRecord> medicalRecords) {
-        this.medicalRecords = medicalRecords;
-    }
 }
