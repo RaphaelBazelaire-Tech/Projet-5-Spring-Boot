@@ -26,8 +26,6 @@ public class DataRepository {
 
     private List<Person> persons = new ArrayList<>();
     private List<Firestation> firestations = new ArrayList<>();
-
-    @SerializedName("medicalrecords")
     private List<MedicalRecord> medicalrecords = new ArrayList<>();
 
     @PostConstruct
