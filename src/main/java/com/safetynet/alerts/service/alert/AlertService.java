@@ -23,5 +23,7 @@ public interface AlertService {
 
     List<PersonInfoDTO> getPersonInfo(String firstName, String lastName);
 
+    List<PersonInfoDTO> getPersonInfoByLastName(String lastName);
+
     List<String> getCommunityEmails(String city);
 }

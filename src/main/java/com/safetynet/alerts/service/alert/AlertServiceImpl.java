@@ -265,6 +265,37 @@ public class AlertServiceImpl implements AlertService {
     }
 
     @Override
+    public List<PersonInfoDTO> getPersonInfoByLastName(String lastName) {
+
+        logger.info("Recherche d'informations pour {}", lastName);
+
+        List<PersonInfoDTO> result = repository.getPersons()
+                .stream()
+                .filter(p -> p.getLastName().equalsIgnoreCase(lastName))
+                .map(p -> {
+
+                    MedicalRecord record = getMedicalRecord(p.getFirstName(), p.getLastName());
+                    int age = calculateAge(record.getBirthdate());
+
+                    logger.debug("Nom de famille trouvé : {} âgé de {}", p.getLastName(), age);
+
+                    return new PersonInfoDTO(
+                            p.getFirstName(),
+                            p.getLastName(),
+                            p.getAddress(),
+                            age,
+                            p.getEmail(),
+                            record.getMedications(),
+                            record.getAllergies());
+                })
+                .collect(Collectors.toList());
+
+        logger.info("{} résultat(s) trouvés pour le nom de famille {}", result.size(), lastName);
+
+        return result;
+    }
+
+    @Override
     public List<String> getCommunityEmails(String city) {
 
         logger.info("Recherche d'emails dans la ville {}", city);
