@@ -1,4 +1,4 @@
-package com.safetynet.alerts.integration.controller;
+package com.safetynet.alerts.integration;
 
 import com.safetynet.alerts.model.Firestation;
 import com.safetynet.alerts.service.firestation.FirestationService;

@@ -1,4 +1,4 @@
-package com.safetynet.alerts.integration.controller;
+package com.safetynet.alerts.integration;
 
 import com.safetynet.alerts.controller.dto.child.ChildAlertDTO;
 import com.safetynet.alerts.controller.dto.fire.FireAddressDTO;
