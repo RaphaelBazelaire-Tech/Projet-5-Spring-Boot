@@ -62,7 +62,7 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
         return dataRepository.getMedicalrecords()
                 .stream()
                 .filter(m -> m.getFirstName().equalsIgnoreCase(firstName)
-                && m.getFirstName().equalsIgnoreCase(lastName))
+                && m.getLastName().equalsIgnoreCase(lastName))
                 .findFirst()
                 .orElse(null);
     }
