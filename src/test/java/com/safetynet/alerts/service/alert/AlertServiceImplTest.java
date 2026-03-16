@@ -97,6 +97,41 @@ public class AlertServiceImplTest {
     }
 
     @Test
+    public void getPersonCoveredByStationShouldCountChildren() {
+
+        Firestation firestation = new Firestation("1509 Culver St", 1);
+
+        Person child = new Person(
+                "Tenley",
+                "Boyd",
+                "1509 Culver St",
+                "Culver",
+                "97451",
+                "841-874-6512",
+                "tenley@email.com"
+        );
+
+        MedicalRecord record = new MedicalRecord(
+                "Tenley",
+                "Boyd",
+                "02/18/2015",
+                List.of(),
+                List.of()
+        );
+
+        when(dataRepository.getFirestations()).thenReturn(List.of(firestation));
+        when(dataRepository.getPersons()).thenReturn(List.of(child));
+        when(dataRepository.getMedicalrecords()).thenReturn(List.of(record));
+
+        FirestationResponseDTO result = alertServiceImpl.getPersonCoveredByStation(1);
+
+        assertNotNull(result);
+        assertEquals(1, result.getPersons().size());
+        assertEquals(0, result.getAdultCount());
+        assertEquals(1, result.getChildCount());
+    }
+
+    @Test
     public void getPhoneNumbersByStationShouldReturnPhoneNumbers() {
 
         Firestation firestation = new Firestation("1509 Culver St", 1);
