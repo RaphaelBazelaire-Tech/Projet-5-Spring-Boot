@@ -34,7 +34,7 @@ public class FirestationController {
 
         firestationService.updateFirestation(firestation);
 
-        return ResponseEntity.ok("Adresse de la station mise à jour succès.");
+        return ResponseEntity.ok("Adresse de la station mise à jour avec succès.");
     }
 
     @DeleteMapping
