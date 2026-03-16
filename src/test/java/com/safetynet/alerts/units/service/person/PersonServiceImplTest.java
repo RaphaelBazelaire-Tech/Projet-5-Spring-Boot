@@ -1,7 +1,8 @@
-package com.safetynet.alerts.service.person;
+package com.safetynet.alerts.units.service.person;
 
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.repository.DataRepository;
+import com.safetynet.alerts.service.person.PersonServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

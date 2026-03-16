@@ -1,7 +1,8 @@
-package com.safetynet.alerts.service.medical;
+package com.safetynet.alerts.units.service.medical;
 
 import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.repository.DataRepository;
+import com.safetynet.alerts.service.medical.MedicalRecordServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

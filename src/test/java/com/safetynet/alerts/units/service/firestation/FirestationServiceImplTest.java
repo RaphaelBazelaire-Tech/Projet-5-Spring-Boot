@@ -1,7 +1,8 @@
-package com.safetynet.alerts.service.firestation;
+package com.safetynet.alerts.units.service.firestation;
 
 import com.safetynet.alerts.model.Firestation;
 import com.safetynet.alerts.repository.DataRepository;
+import com.safetynet.alerts.service.firestation.FirestationServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

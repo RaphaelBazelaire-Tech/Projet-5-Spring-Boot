@@ -1,5 +1,6 @@
-package com.safetynet.alerts.controller;
+package com.safetynet.alerts.units.controller;
 
+import com.safetynet.alerts.controller.MedicalRecordController;
 import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.service.medical.MedicalRecordService;
 import org.junit.jupiter.api.Test;

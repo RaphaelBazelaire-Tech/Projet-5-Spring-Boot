@@ -1,4 +1,4 @@
-package com.safetynet.alerts.service.alert;
+package com.safetynet.alerts.units.service.alert;
 
 import com.safetynet.alerts.controller.dto.child.ChildAlertDTO;
 import com.safetynet.alerts.controller.dto.fire.FireAddressDTO;
@@ -9,6 +9,7 @@ import com.safetynet.alerts.model.Firestation;
 import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.repository.DataRepository;
+import com.safetynet.alerts.service.alert.AlertServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
