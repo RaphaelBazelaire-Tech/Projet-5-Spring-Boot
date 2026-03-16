@@ -65,11 +65,6 @@ public class AlertServiceImpl implements AlertService {
 
                 MedicalRecord record = getMedicalRecord(person.getFirstName(), person.getLastName());
 
-                if (record == null) {
-                    logger.warn("Record medical pour {} {} manquant.", person.getFirstName(), person.getLastName());
-                    continue;
-                }
-
                 int age = record != null ? calculateAge(record.getBirthdate()) : 0;
 
                 if (age <= 18) {
