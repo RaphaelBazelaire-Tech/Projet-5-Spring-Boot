@@ -23,6 +23,28 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Implémentation du service {@link AlertService}.
+ *
+ * <p>Ce service contient la logique métier permettant de répondre
+ * aux différentes alertes demandées par l'application SafetyNet Alerts.
+ * Il utilise le {@link DataRepository} pour accéder aux données
+ * des personnes, des stations de pompiers et des dossiers médicaux.</p>
+ *
+ * <p>Les fonctionnalités principales incluent :</p>
+ * <ul>
+ *     <li>la récupération des personnes couvertes par une station de pompiers</li>
+ *     <li>l'identification des enfants vivant à une adresse spécifique</li>
+ *     <li>la récupération des numéros de téléphone d'une station</li>
+ *     <li>les informations des habitants lors d'un incendie</li>
+ *     <li>les informations des foyers couverts par plusieurs stations (flood)</li>
+ *     <li>la récupération des informations détaillées d'une personne</li>
+ *     <li>la récupération des emails d'une communauté</li>
+ * </ul>
+ *
+ * <p>Ce service est utilisé par les contrôleurs REST afin de founir
+ * les données nécessaires aux endpoints de l'API.</p>
+ */
 @Service
 public class AlertServiceImpl implements AlertService {
 
@@ -30,10 +52,23 @@ public class AlertServiceImpl implements AlertService {
 
     private final DataRepository repository;
 
+    /**
+     * Constructure du service d'alertes.
+     *
+     * @param repository dépôt de données permettant d'accéder aux personnes, stations et dossiers médicaux.
+     */
     public AlertServiceImpl(DataRepository repository) {
         this.repository = repository;
     }
 
+    /**
+     * Récupère la liste des personnes couvertes par une station
+     * de pompiers ainsi que le nombre d'adultes et d'enfants.
+     *
+     * @param stationNumber numéro de la station de pompiers.
+     * @return un {@link FirestationResponseDTO} contenant les personnes couvertes,
+     * le nombre d'adultes et le nombre d'enfants.
+     */
     @Override
     public FirestationResponseDTO getPersonCoveredByStation(int stationNumber) {
 
@@ -80,6 +115,16 @@ public class AlertServiceImpl implements AlertService {
         return new FirestationResponseDTO(persons, adults, children);
     }
 
+    /**
+     * Recherche les enfants vivant à une adresse donnée.
+     *
+     * <p>La réponse inclut également les autres membres du foyer
+     * habitant à la même adresse.</p>
+     *
+     * @param address adresse à analyser.
+     * @return un {@link ChildAlertDTO} contenant la liste des enfants
+     * et les membres de leur foyer.
+     */
     @Override
     public ChildAlertDTO getChildrenByAddress(String address) {
 
@@ -120,6 +165,13 @@ public class AlertServiceImpl implements AlertService {
         return new ChildAlertDTO(children);
     }
 
+    /**
+     * Récupère les numéros de téléphone des personnes
+     * couvertes par une station de pompiers.
+     *
+     * @param stationNumber numéro de la station.
+     * @return une liste de numéros de téléphone uniques.
+     */
     @Override
     public List<String> getPhoneNumbersByStation(int stationNumber) {
 
@@ -138,6 +190,14 @@ public class AlertServiceImpl implements AlertService {
         return phones;
     }
 
+    /**
+     * Récupère les informations des habitants d'une adresse
+     * ainsi que de la station de pompiers correspondante.
+     *
+     * @param address adresse concernée.
+     * @return un {@link FireAddressDTO} contenant le numéro de la station
+     * et la liste des habitants avec leurs informations médicales.
+     */
     @Override
     public FireAddressDTO getFireByAddress(String address) {
 
@@ -176,6 +236,15 @@ public class AlertServiceImpl implements AlertService {
         return new FireAddressDTO(station, residents);
     }
 
+    /**
+     * Récupère les informations des foyers couverts
+     * par plusieurs stations de pompiers.
+     *
+     * <p>Les résultats sont regroupés par station.</p>
+     *
+     * @param stations la liste des numéros de stations.
+     * @return une {@link Map} associant chaque station à la liste des foyers couverts.
+     */
     @Override
     public Map<Integer, List<FloodDTO>> getFloodByStations(List<Integer> stations) {
 
@@ -228,6 +297,14 @@ public class AlertServiceImpl implements AlertService {
         return result;
     }
 
+    /**
+     * Récupère les informations détaillées d'une personne
+     * à partir de son prénom et de son nom.
+     *
+     * @param firstName prénom de la personne.
+     * @param lastName nom de famille de la personne.
+     * @return une liste de {@link PersonInfoDTO} contenant les informations personnelles et médicales.
+     */
     @Override
     public List<PersonInfoDTO> getPersonInfo(String firstName, String lastName) {
 
@@ -259,6 +336,13 @@ public class AlertServiceImpl implements AlertService {
         return result;
     }
 
+    /**
+     * Récupère les informations détaillées de toutes les
+     * personnes correspondant à un nom de famille donné.
+     *
+     * @param lastName nom de famille recherché.
+     * @return une liste de {@link PersonInfoDTO}
+     */
     @Override
     public List<PersonInfoDTO> getPersonInfoByLastName(String lastName) {
 
@@ -290,6 +374,12 @@ public class AlertServiceImpl implements AlertService {
         return result;
     }
 
+    /**
+     * Récupère tous les emails des habitants d'une ville.
+     *
+     * @param city nom de la ville souhaitée.
+     * @return une liste d'emails uniques.
+     */
     @Override
     public List<String> getCommunityEmails(String city) {
 
@@ -307,12 +397,25 @@ public class AlertServiceImpl implements AlertService {
         return emails;
     }
 
+    /**
+     * Calcule l'âge d'une personne à partir de sa date de naissance.
+     *
+     * @param birthdate date de naissance au format MM/dd/yyyy.
+     * @return âge de la personne en années.
+     */
     private int calculateAge(String birthdate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         LocalDate birthDate = LocalDate.parse(birthdate, formatter);
         return Period.between(birthDate, LocalDate.now()).getYears();
     }
 
+    /**
+     * Recherche le dossier médical correspondant à une personne.
+     *
+     * @param firstName prénom de la personne.
+     * @param lastName nom de famille de la personne.
+     * @return le {@link MedicalRecord} correspondant ou {@code null} si aucun dossier trouvé.
+     */
     private MedicalRecord getMedicalRecord(String firstName, String lastName) {
         return repository.getMedicalrecords()
                 .stream()

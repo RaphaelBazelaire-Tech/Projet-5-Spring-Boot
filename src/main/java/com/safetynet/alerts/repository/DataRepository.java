@@ -16,15 +16,50 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Repository responsable de la gestion des données de l'application SafetyNet.
+ *
+ * <p>Cette classe charge les données depuis le fichier `data.json` à l'initialisation
+ * de l'application, et fournit un accès en mémoire aux listes de {@link Person},
+ * {@link Firestation} et {@link MedicalRecord}.</p>
+ *
+ * <p>Elle sert de couche de stockage centralisée pour les services,
+ * évitant tout accès direct au fichier JSON après le chargement.</p>
+ */
 @Repository
 public class DataRepository {
 
     private static final Logger logger = LogManager.getLogger(DataRepository.class);
 
+    /**
+     * Constructeur par défaut.
+     */
+    public DataRepository() {
+    }
+
+    /**
+     * Liste des personnes chargées depuis le fichier JSON.
+     */
     private List<Person> persons = new ArrayList<>();
+
+    /**
+     * Liste des stations de pompiers chargées depuis le fichier JSON.
+     */
     private List<Firestation> firestations = new ArrayList<>();
+
+    /**
+     * Liste des dossiers médicaux chargées depuis le fichier JSON.
+     */
     private List<MedicalRecord> medicalrecords = new ArrayList<>();
 
+    /**
+     * Méthode exécutée après la construction du bean pour
+     * charger les données depuis le fichier `data.json`.
+     *
+     * <p>Les données sont converties en objets Java via Gson.
+     * Si le fichier est introuvable ou invalide, une exception est levée
+     * et l'application ne démarre pas correctement.</p>
+     */
     @PostConstruct
     public void loadData() {
         logger.info("Chargement de data.json...");
@@ -53,28 +88,58 @@ public class DataRepository {
         }
     }
 
+    /**
+     * Récupère la liste de tous les dossiers médicaux.
+     *
+     * @return liste de tous les dossiers médicaux
+     */
     public List<MedicalRecord> getMedicalrecords() {
         return medicalrecords;
     }
 
+    /**
+     * Récupère la liste de toutes les stations de pompiers.
+     *
+     * @return liste de toutes les stations de pompiers.
+     */
     public List<Firestation> getFirestations() {
         return firestations;
     }
 
+    /**
+     * Récupère la liste de toutes les personnes.
+     *
+     * @return liste de toutes les personnes.
+     */
     public List<Person> getPersons() {
         return persons;
     }
 
+    /**
+     * Définit la liste des dossiers médicaux.
+     *
+     * @param medicalrecords nouvelle liste de {@link MedicalRecord}
+     */
     public void setMedicalrecords(List<MedicalRecord> medicalrecords) {
         this.medicalrecords = medicalrecords;
     }
 
-    public void setPersons(List<Person> persons) {
-        this.persons = persons;
-    }
-
+    /**
+     * Définit la liste des stations de pompiers.
+     *
+     * @param firestations nouvelle liste de {@link Firestation}
+     */
     public void setFirestations(List<Firestation> firestations) {
         this.firestations = firestations;
+    }
+
+    /**
+     * Définit la liste des personnes.
+     *
+     * @param persons nouvelle liste de {@link Person}
+     */
+    public void setPersons(List<Person> persons) {
+        this.persons = persons;
     }
 
 }
