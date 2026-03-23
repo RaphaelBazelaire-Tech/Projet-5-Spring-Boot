@@ -28,7 +28,7 @@ public class MedicalRecordServiceImplTest {
     public void addMedicalRecordShouldAddMedicalRecord() {
 
         List<MedicalRecord> records = new ArrayList<>();
-        when(dataRepository.getMedicalrecords()).thenReturn(records);
+        when(dataRepository.getMedicalRecords()).thenReturn(records);
 
         MedicalRecord record = new MedicalRecord(
                 "John",
@@ -58,7 +58,7 @@ public class MedicalRecordServiceImplTest {
         List<MedicalRecord> records = new ArrayList<>();
         records.add(existingRecord);
 
-        when(dataRepository.getMedicalrecords()).thenReturn(records);
+        when(dataRepository.getMedicalRecords()).thenReturn(records);
 
         MedicalRecord updatedRecord = new MedicalRecord(
                 "John",
@@ -89,7 +89,7 @@ public class MedicalRecordServiceImplTest {
         List<MedicalRecord> records = new ArrayList<>();
         records.add(record);
 
-        when(dataRepository.getMedicalrecords()).thenReturn(records);
+        when(dataRepository.getMedicalRecords()).thenReturn(records);
 
         medicalRecordServiceImpl.deleteMedicalRecord("John", "Boyd");
 
@@ -104,7 +104,7 @@ public class MedicalRecordServiceImplTest {
                 new MedicalRecord("Jacob", "Boyd", "05/05/1990", List.of(), List.of())
         );
 
-        when(dataRepository.getMedicalrecords()).thenReturn(records);
+        when(dataRepository.getMedicalRecords()).thenReturn(records);
 
         List<MedicalRecord> result = medicalRecordServiceImpl.getMedicalRecords();
 
@@ -122,7 +122,7 @@ public class MedicalRecordServiceImplTest {
                 List.of()
         );
 
-        when(dataRepository.getMedicalrecords()).thenReturn(List.of(record));
+        when(dataRepository.getMedicalRecords()).thenReturn(List.of(record));
 
         MedicalRecord result = medicalRecordServiceImpl.getMedicalRecordByName("John", "Boyd");
 
@@ -133,7 +133,7 @@ public class MedicalRecordServiceImplTest {
     @Test
     public void getMedicalRecordNyNameShouldReturnNullIfNotFound() {
 
-        when(dataRepository.getMedicalrecords()).thenReturn(new ArrayList<>());
+        when(dataRepository.getMedicalRecords()).thenReturn(new ArrayList<>());
 
         MedicalRecord result = medicalRecordServiceImpl.getMedicalRecordByName("John", "Boyd");
 

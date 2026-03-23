@@ -62,7 +62,7 @@ public class DataWrapper {
      *
      * @return liste des {@link MedicalRecord} contenues dans le JSON.
      */
-    public List<MedicalRecord> getMedicalrecords() {
+    public List<MedicalRecord> getMedicalRecords() {
         return medicalrecords;
     }
 }

@@ -51,7 +51,7 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     @Override
     public void addMedicalRecord(MedicalRecord medicalRecord) {
         logger.info("Ajout d'un point médical pour {} {}", medicalRecord.getFirstName(), medicalRecord.getLastName());
-        dataRepository.getMedicalrecords().add(medicalRecord);
+        dataRepository.getMedicalRecords().add(medicalRecord);
     }
 
     /**
@@ -65,7 +65,7 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     public void updateMedicalRecord(MedicalRecord medicalRecord) {
         logger.info("Mise à jour d'un point médical pour {} {}", medicalRecord.getFirstName(), medicalRecord.getLastName());
 
-        Optional<MedicalRecord> existing = dataRepository.getMedicalrecords()
+        Optional<MedicalRecord> existing = dataRepository.getMedicalRecords()
                 .stream()
                 .filter(m -> m.getFirstName().equalsIgnoreCase(medicalRecord.getFirstName())
                         && m.getLastName().equalsIgnoreCase(medicalRecord.getLastName()))
@@ -88,7 +88,7 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     public void deleteMedicalRecord(String firstName, String lastName) {
         logger.info("Suppression d'un point médical pour {} {}", firstName, lastName);
 
-        dataRepository.getMedicalrecords()
+        dataRepository.getMedicalRecords()
                 .removeIf(m -> m.getFirstName().equalsIgnoreCase(firstName)
                 && m.getLastName().equalsIgnoreCase(lastName));
     }
@@ -100,7 +100,7 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
      */
     @Override
     public List<MedicalRecord> getMedicalRecords() {
-        return dataRepository.getMedicalrecords();
+        return dataRepository.getMedicalRecords();
     }
 
     /**
@@ -112,7 +112,7 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
      */
     @Override
     public MedicalRecord getMedicalRecordByName(String firstName, String lastName) {
-        return dataRepository.getMedicalrecords()
+        return dataRepository.getMedicalRecords()
                 .stream()
                 .filter(m -> m.getFirstName().equalsIgnoreCase(firstName)
                 && m.getLastName().equalsIgnoreCase(lastName))

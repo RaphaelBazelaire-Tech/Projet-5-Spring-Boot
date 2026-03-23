@@ -56,7 +56,7 @@ public class AlertServiceImplTest {
 
         when(dataRepository.getFirestations()).thenReturn(List.of(firestation));
         when(dataRepository.getPersons()).thenReturn(List.of(person));
-        when(dataRepository.getMedicalrecords()).thenReturn(List.of(record));
+        when(dataRepository.getMedicalRecords()).thenReturn(List.of(record));
 
         FirestationResponseDTO result = alertServiceImpl.getPersonCoveredByStation(1);
 
@@ -88,7 +88,7 @@ public class AlertServiceImplTest {
         );
 
         when(dataRepository.getPersons()).thenReturn(List.of(child));
-        when(dataRepository.getMedicalrecords()).thenReturn(List.of(record));
+        when(dataRepository.getMedicalRecords()).thenReturn(List.of(record));
 
         ChildAlertDTO result = alertServiceImpl.getChildrenByAddress("1509 Culver St");
 
@@ -122,7 +122,7 @@ public class AlertServiceImplTest {
 
         when(dataRepository.getFirestations()).thenReturn(List.of(firestation));
         when(dataRepository.getPersons()).thenReturn(List.of(child));
-        when(dataRepository.getMedicalrecords()).thenReturn(List.of(record));
+        when(dataRepository.getMedicalRecords()).thenReturn(List.of(record));
 
         FirestationResponseDTO result = alertServiceImpl.getPersonCoveredByStation(1);
 
@@ -181,7 +181,7 @@ public class AlertServiceImplTest {
 
         when(dataRepository.getFirestations()).thenReturn(List.of(firestation));
         when(dataRepository.getPersons()).thenReturn(List.of(person));
-        when(dataRepository.getMedicalrecords()).thenReturn(List.of(record));
+        when(dataRepository.getMedicalRecords()).thenReturn(List.of(record));
 
         FireAddressDTO result = alertServiceImpl.getFireByAddress("1509 Culver St");
 
@@ -215,7 +215,7 @@ public class AlertServiceImplTest {
 
         when(dataRepository.getFirestations()).thenReturn(List.of(firestation));
         when(dataRepository.getPersons()).thenReturn(List.of(person));
-        when(dataRepository.getMedicalrecords()).thenReturn(List.of(record));
+        when(dataRepository.getMedicalRecords()).thenReturn(List.of(record));
 
         Map<Integer, List<FloodDTO>> result = alertServiceImpl.getFloodByStations(List.of(1));
 
@@ -246,7 +246,7 @@ public class AlertServiceImplTest {
         );
 
         when(dataRepository.getPersons()).thenReturn(List.of(person));
-        when(dataRepository.getMedicalrecords()).thenReturn(List.of(record));
+        when(dataRepository.getMedicalRecords()).thenReturn(List.of(record));
 
         List<PersonInfoDTO> result = alertServiceImpl.getPersonInfo("John", "Boyd");
 
@@ -297,7 +297,7 @@ public class AlertServiceImplTest {
         );
 
         when(dataRepository.getPersons()).thenReturn(List.of(firstPerson, secondPerson));
-        when(dataRepository.getMedicalrecords()).thenReturn(List.of(firstRecord, secondRecord));
+        when(dataRepository.getMedicalRecords()).thenReturn(List.of(firstRecord, secondRecord));
 
         List<PersonInfoDTO> result = alertServiceImpl.getPersonInfoByLastName("Boyd");
 

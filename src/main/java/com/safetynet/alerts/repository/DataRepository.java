@@ -74,7 +74,7 @@ public class DataRepository {
             if (dataWrapper != null) {
                 this.persons = dataWrapper.getPersons() != null ? dataWrapper.getPersons() : new ArrayList<>();
                 this.firestations = dataWrapper.getFirestations() != null ? dataWrapper.getFirestations() : new ArrayList<>();
-                this.medicalrecords = dataWrapper.getMedicalrecords() != null ? dataWrapper.getMedicalrecords() : new ArrayList<>();
+                this.medicalrecords = dataWrapper.getMedicalRecords() != null ? dataWrapper.getMedicalRecords() : new ArrayList<>();
             }
 
             logger.info("Données chargés avec succès.");
@@ -93,7 +93,7 @@ public class DataRepository {
      *
      * @return liste de tous les dossiers médicaux
      */
-    public List<MedicalRecord> getMedicalrecords() {
+    public List<MedicalRecord> getMedicalRecords() {
         return medicalrecords;
     }
 
@@ -120,7 +120,7 @@ public class DataRepository {
      *
      * @param medicalrecords nouvelle liste de {@link MedicalRecord}
      */
-    public void setMedicalrecords(List<MedicalRecord> medicalrecords) {
+    public void setMedicalRecords(List<MedicalRecord> medicalrecords) {
         this.medicalrecords = medicalrecords;
     }
 

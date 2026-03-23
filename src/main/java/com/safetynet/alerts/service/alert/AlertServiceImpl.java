@@ -417,7 +417,7 @@ public class AlertServiceImpl implements AlertService {
      * @return le {@link MedicalRecord} correspondant ou {@code null} si aucun dossier trouvé.
      */
     private MedicalRecord getMedicalRecord(String firstName, String lastName) {
-        return repository.getMedicalrecords()
+        return repository.getMedicalRecords()
                 .stream()
                 .filter(m -> m.getFirstName().equals(firstName)
                         && m.getLastName().equals(lastName))

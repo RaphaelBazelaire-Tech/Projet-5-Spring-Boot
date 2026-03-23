@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import tools.jackson.databind.ObjectMapper;
@@ -43,7 +44,7 @@ public class MedicalRecordControllerIntegrationTest {
         doNothing().when(medicalRecordService).addMedicalRecord(record);
 
         mockMvc.perform(post("/medicalRecord")
-                .contentType("application/json")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(record)))
                 .andExpect(status().isOk());
     }
@@ -62,7 +63,7 @@ public class MedicalRecordControllerIntegrationTest {
         doNothing().when(medicalRecordService).updateMedicalRecord(record);
 
         mockMvc.perform(put("/medicalRecord")
-                .contentType("application/json")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(record)))
                 .andExpect(status().isOk());
     }
