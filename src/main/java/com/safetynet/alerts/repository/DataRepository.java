@@ -10,11 +10,16 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
+import tools.jackson.databind.ObjectMapper;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Repository responsable de la gestion des données de l'application SafetyNet.
@@ -38,6 +43,11 @@ public class DataRepository {
     }
 
     /**
+     * ObjectMapper pour l'écriture des données dans le data.json.
+     */
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
+    /**
      * Liste des personnes chargées depuis le fichier JSON.
      */
     private List<Person> persons = new ArrayList<>();
@@ -51,6 +61,11 @@ public class DataRepository {
      * Liste des dossiers médicaux chargées depuis le fichier JSON.
      */
     private List<MedicalRecord> medicalrecords = new ArrayList<>();
+
+    /**
+     * Chemin pour récupérer le data.json pour sauvegarder les données.
+     */
+    private final String filePath = "src/main/resources/data.json";
 
     /**
      * Méthode exécutée après la construction du bean pour
@@ -85,6 +100,22 @@ public class DataRepository {
         } catch (Exception e) {
             logger.error("Impossible de charger le fichier data.json...", e);
             throw new RuntimeException("Impossible de charger le fichier data.json...", e);
+        }
+    }
+
+    public void saveData() {
+        try {
+
+            Map<String, Object> data = new HashMap<>();
+            data.put("persons", this.persons);
+            data.put("firestations", this.firestations);
+            data.put("medicalrecords", this.medicalrecords);
+
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), data);
+
+        } catch (Exception e) {
+            logger.error("Impossible de sauvegarder le fichier data.json...", e);
+            throw new RuntimeException("Impossible de sauvegarder le fichier data.json...", e);
         }
     }
 
