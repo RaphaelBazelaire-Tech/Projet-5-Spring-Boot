@@ -53,6 +53,8 @@ public class FirestationServiceImpl implements FirestationService {
     public void addFirestation(Firestation firestation) {
         logger.info("Ajout d'une station de pompiers : {}", firestation.getAddress());
         dataRepository.getFirestations().add(firestation);
+
+        dataRepository.saveData();
     }
 
     /**
@@ -70,6 +72,8 @@ public class FirestationServiceImpl implements FirestationService {
                 .findFirst();
 
         existing.ifPresent(f -> f.setStation(firestation.getStation()));
+
+        dataRepository.saveData();
     }
 
     /**
@@ -83,6 +87,8 @@ public class FirestationServiceImpl implements FirestationService {
 
         dataRepository.getFirestations()
                 .removeIf(f -> f.getAddress().equalsIgnoreCase(address));
+
+        dataRepository.saveData();
     }
 
     /**

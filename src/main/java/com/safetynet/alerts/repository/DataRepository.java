@@ -63,7 +63,7 @@ public class DataRepository {
     private List<MedicalRecord> medicalrecords = new ArrayList<>();
 
     /**
-     * Chemin pour récupérer le data.json pour sauvegarder les données.
+     * Chemin pour récupérer le `data.json` pour sauvegarder les données.
      */
     private final String filePath = "src/main/resources/data.json";
 
@@ -103,6 +103,13 @@ public class DataRepository {
         }
     }
 
+    /**
+     * Méthode exécutée après l'ajout en cache d'une donnée pour
+     * sauvegarder les données dans le fichier `data.json`.
+     *
+     * <p>Si le fichier est introuvable ou invalide, une exception est levée
+     * et l'application ne fonctionne pas correctement.</p>
+     */
     public void saveData() {
         try {
 

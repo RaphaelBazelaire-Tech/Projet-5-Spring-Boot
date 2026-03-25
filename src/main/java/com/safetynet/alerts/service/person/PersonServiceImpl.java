@@ -52,6 +52,8 @@ public class PersonServiceImpl implements PersonService {
     public void addPerson(Person person) {
         logger.info("Ajout d'une personne : {} {}", person.getFirstName(), person.getLastName());
         dataRepository.getPersons().add(person);
+
+        dataRepository.saveData();
     }
 
     /**
@@ -78,6 +80,8 @@ public class PersonServiceImpl implements PersonService {
             p.setPhone(person.getPhone());
             p.setEmail(person.getEmail());
         });
+
+        dataRepository.saveData();
     }
 
     /**
@@ -94,6 +98,8 @@ public class PersonServiceImpl implements PersonService {
                 p -> p.getFirstName().equalsIgnoreCase(firstName)
                         && p.getLastName().equalsIgnoreCase(lastName)
         );
+
+        dataRepository.saveData();
     }
 
     /**

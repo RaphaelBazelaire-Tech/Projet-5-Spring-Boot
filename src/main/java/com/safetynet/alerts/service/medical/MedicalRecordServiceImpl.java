@@ -52,6 +52,8 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     public void addMedicalRecord(MedicalRecord medicalRecord) {
         logger.info("Ajout d'un point médical pour {} {}", medicalRecord.getFirstName(), medicalRecord.getLastName());
         dataRepository.getMedicalRecords().add(medicalRecord);
+
+        dataRepository.saveData();
     }
 
     /**
@@ -76,6 +78,8 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
             m.setMedications(medicalRecord.getMedications());
             m.setAllergies(medicalRecord.getAllergies());
         });
+
+        dataRepository.saveData();
     }
 
     /**
@@ -91,6 +95,8 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
         dataRepository.getMedicalRecords()
                 .removeIf(m -> m.getFirstName().equalsIgnoreCase(firstName)
                 && m.getLastName().equalsIgnoreCase(lastName));
+
+        dataRepository.saveData();
     }
 
     /**
